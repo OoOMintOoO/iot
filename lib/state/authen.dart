@@ -10,21 +10,37 @@ class Authen extends StatefulWidget {
 
 class _AuthenState extends State<Authen> {
   late double screen;
+  late String user, password;
   @override
   Widget build(BuildContext context) {
     screen = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        body: Center(
-      child: Column(
-        children: [
-          showLogo(),
-          Mystyle().titleH1('My Iot App'),
-          buildUser(),
-          buildPassword(),
-        ],
+      backgroundColor: Colors.white30,
+      body: Center(
+        child: Column(
+          children: [
+            showLogo(),
+            Mystyle().titleH1('My Iot App'),
+            buildUser(),
+            buildPassword(),
+            buildLogin()
+          ],
+        ),
       ),
-    ));
+    );
+  }
+
+  Container buildLogin() {
+    return Container(
+      width: screen * 0.6,
+      margin: EdgeInsets.only(top: 8),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(primary: Mystyle().primarydarkColor),
+        onPressed: () {},
+        child: Text('Login'),
+      ),
+    );
   }
 
   Container buildUser() {
@@ -32,6 +48,7 @@ class _AuthenState extends State<Authen> {
       margin: EdgeInsets.only(top: 16),
       width: screen * 0.6,
       child: TextField(
+        onChanged: (value) => password = value.trim(),
         decoration: InputDecoration(
           prefixIcon: Icon(
             Icons.perm_identity,
@@ -76,7 +93,7 @@ class _AuthenState extends State<Authen> {
   Container showLogo() {
     return Container(
       //margin: EdgeInsets.only(top: 10),
-      width: screen * 0.4,
+      width: screen * 0.3,
       child: Center(child: Mystyle().showLogo()),
     );
   }
